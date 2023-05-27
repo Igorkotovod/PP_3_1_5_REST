@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
+import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
 
 import java.util.List;
 
@@ -19,13 +20,11 @@ import java.util.List;
 @CrossOrigin
 public class AdminController {
 
-    private final UserService userService;
-    private final RoleService roleService;
+    private final UserServiceImpl userService;
 
     @Autowired
-    public AdminController(UserService userService, RoleService roleService) {
+    public AdminController(UserServiceImpl userService) {
         this.userService = userService;
-        this.roleService = roleService;
     }
 
 
