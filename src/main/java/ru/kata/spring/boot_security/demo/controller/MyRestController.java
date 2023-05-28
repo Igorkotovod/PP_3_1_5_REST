@@ -21,43 +21,43 @@ import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/api")
 @CrossOrigin
-public class AdminController {
+public class MyRestController {
 
     private final UserServiceImpl userService;
     private final RoleServiceImpl roleService;
 
     @Autowired
-    public AdminController(UserServiceImpl userService, RoleServiceImpl roleService) {
+    public MyRestController(UserServiceImpl userService, RoleServiceImpl roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
 
-    @GetMapping("users")
+    @GetMapping("admin/users")
     public ResponseEntity<List<User>> listUser() {
         return new ResponseEntity<>(userService.listAllUsers(),HttpStatus.OK);
     }
 
-    @GetMapping("users/{id}")
+    @GetMapping("admin/users/{id}")
     public ResponseEntity<User> showUser(@PathVariable Long id) {
         User user = userService.getUser(id);
         return new ResponseEntity<>(user,HttpStatus.OK);
     }
 
-    @PostMapping(value = "users")
+    @PostMapping(value = "admin/users")
     public ResponseEntity<User> newUser(@RequestBody User user) {
         userService.saveUser(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PatchMapping("/users/{id}")
+    @PatchMapping("admin/users/{id}")
     public ResponseEntity<User> update(@RequestBody User user) {
         userService.saveUser(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("users/{id}")
+    @DeleteMapping("admin/users/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.OK);
