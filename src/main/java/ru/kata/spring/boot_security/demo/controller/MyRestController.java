@@ -36,13 +36,18 @@ public class MyRestController {
 
     @GetMapping("admin/users")
     public ResponseEntity<List<User>> listUser() {
-        return new ResponseEntity<>(userService.listAllUsers(),HttpStatus.OK);
+        final List<User> users = userService.listAllUsers();
+        return users != null && !users.isEmpty()
+                ? new ResponseEntity<>(users, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("admin/users/{id}")
     public ResponseEntity<User> showUser(@PathVariable Long id) {
-        User user = userService.getUser(id);
-        return new ResponseEntity<>(user,HttpStatus.OK);
+        final User user = userService.getUser(id);
+        return user != null
+                ? new ResponseEntity<>(user, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping(value = "admin/users")
@@ -65,65 +70,25 @@ public class MyRestController {
 
     @GetMapping("/user")
     public ResponseEntity<User> showUser(Authentication auth) {
-        return new ResponseEntity<>(userService.findUserByUsername(auth.getName()), HttpStatus.OK);
+        final User user = userService.findUserByUsername(auth.getName());
+        return user != null
+                ? new ResponseEntity<>(user, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/roles")
     public ResponseEntity<List<Role>> getAllRoles() {
-        return new ResponseEntity<>(roleService.listAllRoles(), HttpStatus.OK);
+        final List<Role> roles = roleService.listAllRoles();
+        return roles != null && !roles.isEmpty()
+                ? new ResponseEntity<>(roles, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/roles/{id}")
     ResponseEntity<Role> getRoleById(@PathVariable("id") long id){
-        return new ResponseEntity<>(roleService.findRoleById(id), HttpStatus.OK);
+        final Role role = roleService.findRoleById(id);
+        return role != null
+                ? new ResponseEntity<>(role, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-/*
-    @GetMapping
-    public String listUser(Model model, Principal principal) {
-        model.addAttribute("newUser", new User());
-        model.addAttribute("user", userService.findUserByUsername(principal.getName()));
-        model.addAttribute("listRoles", roleService.listAllRoles());
-        model.addAttribute("listUser", userService.listAllUsers());
-        return "admin";
-    }
-
-    @GetMapping("/{id}")
-    public String showUser(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("user", userService.getUser(id));
-        return "redirect:/user";
-    }
-
-    @GetMapping("/new")
-    public String addNewUser(Model model) {
-        List<Role> roles = roleService.listAllRoles();
-        model.addAttribute("roles", roles);
-        model.addAttribute("user", new User());
-        return "redirect:/";
-    }
-
-    @PostMapping()
-    public String saveUser(@ModelAttribute("user") User user) {
-        userService.saveUser(user);
-        return "redirect:/admin";
-    }
-
-    @GetMapping("/{id}/editUser")
-    public String edit(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("user", userService.getUser(id));
-        List<Role> roles = roleService.listAllRoles();
-        model.addAttribute("rolesAdd", roles);
-        return "redirect:/admin";
-    }
-
-    @PatchMapping("/{id}")
-    public String updateUser(@ModelAttribute("user") User user) {
-        userService.updateUser(user);
-        return "redirect:/admin";
-    }
-
-    @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable("id") Long id) {
-        userService.deleteUser(id);
-        return "redirect:/admin";
-    }*/
 }
