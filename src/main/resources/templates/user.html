@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+          crossorigin="anonymous">
+    <title>User page</title>
+</head>
+<body>
+<div class="container-fluid bg-light">
+    <div class="row ">
+        <div class="col-md-12 bg-dark text-white">
+            <nav class="navbar navbar-dark bg">
+                <span class="navbar-text">
+                    <b>
+                  <tr th:object="${user}"
+                      th:text="${user.getUsername()} ">
+                  </tr>
+                    </b>
+                    <tr th:object="${user}"
+                        th:text="'  with roles:  ' + ${user.getRolesInString()}">
+                  </tr>
+                </span>
+                <a class="nav-item text-white nav-link active mr-md-n1" href="/logout">Logout</a>
+            </nav>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-md-12 bg-light">
+            <br/>
+        </div>
+    </div>
+    <div class="row ">
+
+        <div class="col-md-2 bg-white">
+            <div class="row ">
+                <nav class="nav flex-column nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/user">User</a>
+                    </li>
+                </nav>
+            </div>
+        </div>
+
+        <div class="col-md-10  ">
+            <h2>User information page</h2>
+            <div class="card">
+                <h5 class="card-header">About user</h5>
+                <div class="card-body">
+                    <table class="table table-hover bg-white ">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">First name</th>
+                            <th scope="col">Last name</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Role</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:object="${user}">
+                            <th scope="row" th:text="${user.getId()}"></th>
+                            <td th:text="${user.getName()}"></td>
+                            <td th:text="${user.getLast_name()}"></td>
+                            <td th:text="${user.getAge()}"></td>
+                            <td th:text="${user.getUsername()}"></td>
+                            <td th:text="${user.getRolesInString()}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
