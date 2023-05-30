@@ -23,13 +23,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
-public class MyRestController {
+public class AdminRestController {
 
     private final UserServiceImpl userService;
     private final RoleServiceImpl roleService;
 
     @Autowired
-    public MyRestController(UserServiceImpl userService, RoleServiceImpl roleService) {
+    public AdminRestController(UserServiceImpl userService, RoleServiceImpl roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
