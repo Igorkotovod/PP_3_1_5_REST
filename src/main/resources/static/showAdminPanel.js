@@ -178,7 +178,7 @@ async function showEditModal(id) {
     form.name.value = user.name;
     form.lastname.value = user.last_name;
     form.age.value = user.age;
-    form.username.value = user.email;
+    form.username.value = user.username;
     form.password.value = '';
 
 
@@ -241,7 +241,7 @@ async function showDeleteModal(id) {
     form.name.value = user.name;
     form.lastname.value = user.last_name;
     form.age.value = user.age;
-    form.username.value = user.email;
+    form.email.value = user.username;
 
 
     $('#rolesDeleteUser').empty();
