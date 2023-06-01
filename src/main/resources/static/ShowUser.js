@@ -1,7 +1,8 @@
 "use strict";
-$(async function() {
+$(async function () {
     await thisUser();
 });
+
 async function thisUser() {
     fetch("http://localhost:8080/api/user")
         .then(res => res.json())
