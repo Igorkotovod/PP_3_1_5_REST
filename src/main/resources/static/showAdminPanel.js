@@ -205,7 +205,6 @@ async function showEditModal(id) {
 /* Remove user */
 
 $(async function () {
-
     removeUser();
 });
 
