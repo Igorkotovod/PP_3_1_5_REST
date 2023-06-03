@@ -38,7 +38,7 @@ public class AdminController {
         model.addAttribute("user", userService.findUserByUsername(principal.getName()));
         model.addAttribute("listRoles", roleService.listAllRoles());
         model.addAttribute("listUser", userService.listAllUsers());
-        return "adminPage";
+        return "admin";
     }
 
     @GetMapping("/{id}")
