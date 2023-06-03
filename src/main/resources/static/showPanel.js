@@ -108,7 +108,7 @@ async function newUser() {
         })
         if (response.ok) {
             form.reset();
-            showAllUsers();
+            await showAllUsers();
             $('#allUsersTable').click();
         } else {
             let error = await response.json();
