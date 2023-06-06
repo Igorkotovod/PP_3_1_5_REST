@@ -10,9 +10,9 @@ async function thisUser() {
     fetch("http://localhost:8080/api/user")
         .then(res => res.json())
         .then(data => {
-            $('#headerUsername').append(data.username);
+            $('#heapUsername').append(data.username);
             let roles = data.roles.map(role => " " + role.name.substring(5));
-            $('#headerRoles').append(roles);
+            $('#heapRoles').append(roles);
 
             let user = `$(
             <tr>
